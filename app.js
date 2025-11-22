@@ -15,13 +15,6 @@ const input = readline.createInterface({
     output: process.stdout
 });
 
-/*
-input.question("text", (variable) => {
-    "CODE"
-    rl.close();
-});
-*/
-
 class UsersLogin {
     constructor(username, password) {
         this.username = username
@@ -30,10 +23,23 @@ class UsersLogin {
 }
 
 let dbUsers = []
+            dbUsers.push(new UsersLogin("alan", "p"))
 
 
-dbUsers.push(new UsersLogin("Alan", "Contra"))
+input.question("Write Username: ", (u) => {
 
-console.log(dbUsers)
+        const exists = dbUsers.some(i => i.username === u)
 
+        if (exists) {
+            console.log("This username is in use")
+            input.close()
+            return
+            }   
 
+        input.question("Write a password: ", (p) => {
+
+            dbUsers.push(new UsersLogin(u, p))
+            console.log("User created:", dbUsers)
+            input.close()
+        })
+    })
