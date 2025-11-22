@@ -7,3 +7,33 @@ RULES:
 
 3. If they aren’t correct, the program should say so.
 */
+
+const readline = require("readline");
+
+const input = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+/*
+input.question("text", (variable) => {
+    "CODE"
+    rl.close();
+});
+*/
+
+class UsersLogin {
+    constructor(username, password) {
+        this.username = username
+        this.password = password
+    }
+}
+
+let dbUsers = []
+
+
+dbUsers.push(new UsersLogin("Alan", "Contra"))
+
+console.log(dbUsers)
+
+
