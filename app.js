@@ -23,9 +23,65 @@ class UsersLogin {
 }
 
 let dbUsers = []
-            dbUsers.push(new UsersLogin("alan", "p"))
+dbUsers.push(new UsersLogin("alan", "p"))
+let menu = 0;
+
+input.question("1: Registrer | 2: Login: ", (i) => {
+    menu = Number(i);
+
+    switch (menu) {
+        case 1:
+            input.question("Write Username: ", (u) => {
+                const exists = dbUsers.some(i => i.username === u);
+
+                if (exists) {
+                    console.log("This username is in use");
+                    input.close();
+                    return;
+                }
+
+                input.question("Write a password: ", (p) => {
+                    dbUsers.push(new UsersLogin(u, p));
+                    console.log("User created:", dbUsers);
+                    input.close();
+                });
+            });
+            break;
+
+        case 2:
+            input.question("Write your user: ", (u) => {
+                const exists = dbUsers.some(i => i.username === u);
+
+                if (!exists) {
+                    console.log("Usuario no registrado");
+                    input.close();
+                    return;
+                }
+
+                input.question("Write your password: ", (p) => {
+                    const pExists = dbUsers.some(i => i.password === p);
+
+                    if (pExists) {
+                        console.log("Bienvenido");
+                    } else {
+                        console.log("Contraseña incorrecta");
+                    }
+
+                    input.close();
+                });
+            });
+            break;
+
+        default:
+            console.log("Invalid option");
+            input.close();
+            break;
+    }
+});
 
 
+
+/*
 input.question("Write Username: ", (u) => {
 
         const exists = dbUsers.some(i => i.username === u)
@@ -43,3 +99,4 @@ input.question("Write Username: ", (u) => {
             input.close()
         })
     })
+*/
